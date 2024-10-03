@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { RutaService } from './ruta.service';
 import { Ruta } from './ruta.model';
 
 @Component({
   selector: 'app-ruta',
+  standalone: true,
   templateUrl: './ruta.component.html',
   styleUrls: ['./ruta.component.css'],
+  imports: [FormsModule, CommonModule] 
 })
-export class RutaComponent implements OnInit {
+export class RutaComponent {
   rutas: Ruta[] = [];
-  selectedRuta: Ruta | null = null;
+  selectedRuta: Ruta = { nombreRuta: '', horarioDeInicio: '', horarioDeFinal: '', diasDisponibles: '' };
 
   constructor(private rutaService: RutaService) {}
 
@@ -24,26 +28,36 @@ export class RutaComponent implements OnInit {
   }
 
   onSelect(ruta: Ruta): void {
-    this.selectedRuta = ruta;
+    this.selectedRuta = ruta; 
   }
 
-  createRuta(ruta: Ruta): void {
-    this.rutaService.createRuta(ruta).subscribe(() => {
+  createRuta(nombreRuta: string, horarioDeInicio: string, horarioDeFinal: string, diasDisponibles: string): void {
+    const newRuta: Ruta = { 
+      nombreRuta, 
+      horarioDeInicio, 
+      horarioDeFinal, 
+      diasDisponibles, 
+      relacionBusRutaConductorIds: [], 
+      estacionIds: []
+    };
+    this.rutaService.createRuta(newRuta).subscribe(() => {
       this.getRutas();
     });
   }
 
-  updateRuta(ruta: Ruta): void {
-    if (ruta.id) {
-      this.rutaService.updateRuta(ruta).subscribe(() => {
+  updateRuta(): void {
+    if (this.selectedRuta && this.selectedRuta.id) {
+      this.rutaService.updateRuta(this.selectedRuta).subscribe(() => {
         this.getRutas();
       });
     }
   }
 
-  deleteRuta(id: number): void {
-    this.rutaService.deleteRuta(id).subscribe(() => {
-      this.getRutas();
-    });
+  deleteRuta(id: number | undefined): void {
+    if (id) {  
+      this.rutaService.deleteRuta(id).subscribe(() => {
+        this.getRutas();
+      });
+    }
   }
 }

@@ -4,4 +4,5 @@ export interface Conductor {
   telefono: number;
   direccion?: string;
   buses_asignados?: number;
+  relacionBusRutaConductorIds?: number[];
 }

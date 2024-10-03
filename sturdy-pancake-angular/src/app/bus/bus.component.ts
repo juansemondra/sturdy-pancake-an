@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';  
 import { BusService } from './bus.service';
 import { Bus } from './bus.model';
 
 @Component({
   selector: 'app-bus',
+  standalone: true,
   templateUrl: './bus.component.html',
   styleUrls: ['./bus.component.css'],
+  imports: [FormsModule, CommonModule]
 })
 export class BusComponent implements OnInit {
   buses: Bus[] = [];
@@ -27,9 +31,11 @@ export class BusComponent implements OnInit {
     this.selectedBus = bus;
   }
 
-  createBus(bus: Bus): void {
-    this.busService.createBus(bus).subscribe(() => {
+  createBus(placa: string, modelo: string): void {
+    const newBus: Bus = { placa, modelo }; 
+    this.busService.createBus(newBus).subscribe(() => {
       this.getBuses();
+      this.selectedBus = null;
     });
   }
 
@@ -37,6 +43,7 @@ export class BusComponent implements OnInit {
     if (bus.id) {
       this.busService.updateBus(bus).subscribe(() => {
         this.getBuses();
+        this.selectedBus = null;
       });
     }
   }
@@ -44,6 +51,7 @@ export class BusComponent implements OnInit {
   deleteBus(id: number): void {
     this.busService.deleteBus(id).subscribe(() => {
       this.getBuses();
+      this.selectedBus = null;
     });
   }
 }

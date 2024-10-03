@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule } from '@angular/router';  // Importa RouterModule
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
+  imports: [RouterModule]  // Solo importa el RouterModule
 })
 export class AppComponent {
-  title = 'sturdy-pancake-angular';
+  title = 'Gestión de Buses';
 }

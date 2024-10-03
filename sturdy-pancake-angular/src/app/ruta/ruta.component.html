@@ -1,44 +1,39 @@
 <div class="container">
-    <h1>Gestión de Rutas</h1>
-  
-    <div *ngIf="rutas.length === 0">No hay rutas disponibles.</div>
-  
+  <h1>Gestión de Rutas</h1>
+
+  <div *ngIf="rutas.length === 0">No hay rutas disponibles.</div>
+
+  <ul>
+    <li *ngFor="let ruta of rutas" (click)="onSelect(ruta)">
+      {{ ruta.nombreRuta }} - {{ ruta.horarioDeInicio }} - {{ ruta.horarioDeFinal }} - Días: {{ ruta.diasDisponibles }}
+    </li>
+  </ul>
+
+  <div *ngIf="selectedRuta">
+    <h2>Editar Ruta</h2>
+    <input [(ngModel)]="selectedRuta.nombreRuta" placeholder="Nombre de la Ruta" />
+    <input [(ngModel)]="selectedRuta.horarioDeInicio" placeholder="Horario de Inicio" />
+    <input [(ngModel)]="selectedRuta.horarioDeFinal" placeholder="Horario de Final" />
+    <input [(ngModel)]="selectedRuta.diasDisponibles" placeholder="Días Disponibles" />
+    <button (click)="updateRuta()">Actualizar</button>
+  </div>
+
+  <h2>Crear Nueva Ruta</h2>
+  <input #nuevoNombreRuta placeholder="Nombre de la Ruta" />
+  <input #nuevoHorarioInicio placeholder="Horario de Inicio" />
+  <input #nuevoHorarioFinal placeholder="Horario de Final" />
+  <input #nuevosDiasDisponibles placeholder="Días Disponibles" />
+  <button (click)="createRuta(nuevoNombreRuta.value, nuevoHorarioInicio.value, nuevoHorarioFinal.value, nuevosDiasDisponibles.value)">
+    Crear
+  </button>
+
+  <div>
+    <h2>Eliminar Ruta</h2>
     <ul>
-      <li *ngFor="let ruta of rutas" (click)="onSelect(ruta)">
-        {{ ruta.nombreRuta }} - {{ ruta.horarioDeInicio }} - {{ ruta.horarioDeFinal }} - Días: {{ ruta.diasDisponibles }}
+      <li *ngFor="let ruta of rutas">
+        {{ ruta.nombreRuta }}
+        <button (click)="deleteRuta(ruta.id)">Eliminar</button>
       </li>
     </ul>
-  
-    <div *ngIf="selectedRuta">
-      <h2>Editar Ruta</h2>
-      <input [(ngModel)]="selectedRuta.nombreRuta" placeholder="Nombre de la Ruta" />
-      <input [(ngModel)]="selectedRuta.horarioDeInicio" placeholder="Horario de Inicio" />
-      <input [(ngModel)]="selectedRuta.horarioDeFinal" placeholder="Horario de Final" />
-      <input [(ngModel)]="selectedRuta.diasDisponibles" placeholder="Días Disponibles" />
-      <button (click)="updateRuta(selectedRuta)">Actualizar</button>
-    </div>
-  
-    <h2>Crear Nueva Ruta</h2>
-    <input #nuevoNombreRuta placeholder="Nombre de la Ruta" />
-    <input #nuevoHorarioInicio placeholder="Horario de Inicio" />
-    <input #nuevoHorarioFinal placeholder="Horario de Final" />
-    <input #nuevosDiasDisponibles placeholder="Días Disponibles" />
-    <button (click)="createRuta({
-        nombreRuta: nuevoNombreRuta.value,
-        horarioDeInicio: nuevoHorarioInicio.value,
-        horarioDeFinal: nuevoHorarioFinal.value,
-        diasDisponibles: nuevosDiasDisponibles.value
-      })">
-      Crear
-    </button>
-  
-    <div>
-      <h2>Eliminar Ruta</h2>
-      <ul>
-        <li *ngFor="let ruta of rutas">
-          {{ ruta.nombreRuta }}
-          <button (click)="deleteRuta(ruta.id)">Eliminar</button>
-        </li>
-      </ul>
-    </div>
   </div>
+</div>
