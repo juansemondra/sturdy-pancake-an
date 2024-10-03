@@ -1,0 +1,35 @@
+<div class="container">
+    <h1>Gestión de Buses</h1>
+  
+    <div *ngIf="buses.length === 0">No hay buses disponibles.</div>
+  
+    <ul>
+      <li *ngFor="let bus of buses" (click)="onSelect(bus)">
+        {{ bus.placa }} - {{ bus.modelo }}
+      </li>
+    </ul>
+  
+    <div *ngIf="selectedBus">
+      <h2>Editar Bus</h2>
+      <input [(ngModel)]="selectedBus.placa" placeholder="Placa" />
+      <input [(ngModel)]="selectedBus.modelo" placeholder="Modelo" />
+      <button (click)="updateBus(selectedBus)">Actualizar</button>
+    </div>
+  
+    <h2>Crear Nuevo Bus</h2>
+    <input #nuevaPlaca placeholder="Placa" />
+    <input #nuevoModelo placeholder="Modelo" />
+    <button (click)="createBus({ placa: nuevaPlaca.value, modelo: nuevoModelo.value })">
+      Crear
+    </button>
+  
+    <div>
+      <h2>Eliminar Bus</h2>
+      <ul>
+        <li *ngFor="let bus of buses">
+          {{ bus.placa }}
+          <button (click)="deleteBus(bus.id)">Eliminar</button>
+        </li>
+      </ul>
+    </div>
+  </div>

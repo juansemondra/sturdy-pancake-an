@@ -5,11 +5,17 @@
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
     "types": [
-      "jasmine"
-    ]
+      "jasmine",
+      "node"
+    ],
+    "module": "commonjs", // Para manejar módulos en Node.js durante las pruebas
+    "target": "es2015" // Puedes ajustar esto según tu versión de TypeScript
   },
   "include": [
     "src/**/*.spec.ts",
     "src/**/*.d.ts"
+  ],
+  "files": [
+    "src/test.ts"
   ]
 }
