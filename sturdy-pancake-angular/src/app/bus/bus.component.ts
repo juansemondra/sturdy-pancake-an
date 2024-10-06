@@ -32,6 +32,9 @@ export class BusComponent implements OnInit {
   }
 
   createBus(placa: string, modelo: string): void {
+    if (!placa || !modelo) {
+      return; 
+    }
     const newBus: Bus = { placa, modelo }; 
     this.busService.createBus(newBus).subscribe(() => {
       this.getBuses();
