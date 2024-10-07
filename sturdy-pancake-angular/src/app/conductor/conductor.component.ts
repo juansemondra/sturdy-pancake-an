@@ -1,24 +1,32 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConductorService } from './conductor.service';
 import { Conductor } from './conductor.model';
+import { ListComponent } from '../list/list.component';
 
 @Component({
   selector: 'app-conductor',
   standalone: true,
   templateUrl: './conductor.component.html',
   styleUrls: ['./conductor.component.css'],
-  imports: [FormsModule, CommonModule],
+  imports: [CommonModule, ListComponent],
 })
-export class ConductorComponent {
+export class ConductorComponent implements OnInit {
   conductores: Conductor[] = [];
-  selectedConductor: Conductor = { nombre: '', telefono: 0 };
 
-  constructor(private conductorService: ConductorService) {}
+  columns = [
+    { field: 'id', header: 'ID' },
+    { field: 'nombre', header: 'Nombre' },
+    { field: 'telefono', header: 'Teléfono' },
+    { field: 'direccion', header: 'Dirección' },
+  ];
+
+  private conductorService = inject(ConductorService);
 
   ngOnInit(): void {
     this.getConductores();
+    //console result
+    console.log(this.conductores);
   }
 
   getConductores(): void {
@@ -27,39 +35,23 @@ export class ConductorComponent {
     });
   }
 
-  onSelect(conductor: Conductor): void {
-    this.selectedConductor = conductor;
+  onEdit(conductor: Conductor): void {
+    // Implement navigation to edit form
+    console.log('Edit conductor:', conductor);
   }
 
-  createConductor(nombre: string, telefono: string): void {
-    const telefonoNumber = parseInt(telefono, 10); // Convertir a número
-    const newConductor: Conductor = {
-      nombre,
-      telefono: telefonoNumber,
-      relacionBusRutaConductorIds: [],
-    };
-    this.conductorService.createConductor(newConductor).subscribe(() => {
-      this.getConductores();
-    });
-  }
-
-  updateConductor(): void {
-    if (this.selectedConductor && this.selectedConductor.id) {
-      this.conductorService
-        .updateConductor(this.selectedConductor)
-        .subscribe(() => {
-          this.getConductores();
-        });
-    }
-  }
-
-  deleteConductor(id: number | undefined): void {
-    if (id !== undefined) {
-      this.conductorService.deleteConductor(id).subscribe(() => {
+  onDelete(conductor: Conductor): void {
+    if (conductor.id !== undefined) {
+      this.conductorService.deleteConductor(conductor.id).subscribe(() => {
         this.getConductores();
       });
     } else {
       console.error('Error: id es undefined y no puede eliminarse');
     }
+  }
+
+  createConductor(): void {
+    // Implement navigation to create form
+    console.log('Navigate to create conductor form');
   }
 }

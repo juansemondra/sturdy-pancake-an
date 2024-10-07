@@ -1,0 +1,21 @@
+.container {
+  padding: 20px;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #2884e6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1c6bb5;
+}
