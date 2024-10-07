@@ -1,27 +1,18 @@
-nav {
-    background-color: #f8f9fa;
-    padding: 1em;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  li {
-    display: inline;
-    margin-right: 15px;
-  }
-  
-  a {
-    text-decoration: none;
-    color: #007bff;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-  
-  .router-outlet {
-    margin-top: 20px;
-  }
+/* Contenedor principal que organiza el layout en dos columnas */
+.app-container {
+  display: flex;
+  height: 100vh;
+}
+
+/* El navbar ocupa un ancho fijo */
+app-navbar {
+  flex-shrink: 0;
+}
+
+/* El contenido principal debe ocupar el resto del espacio disponible */
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #f9f9f9;
+  overflow-y: auto;
+}

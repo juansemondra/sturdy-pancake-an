@@ -1,9 +1,6 @@
-<nav>
-  <ul>
-    <li><a routerLink="/buses">Buses</a></li>
-    <li><a routerLink="/conductores">Conductores</a></li>
-    <li><a routerLink="/rutas">Rutas</a></li>
-  </ul>
-</nav>
-
-<router-outlet></router-outlet>
+<div class="app-container">
+  <app-navbar></app-navbar>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

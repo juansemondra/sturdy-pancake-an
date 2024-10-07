@@ -1,0 +1,56 @@
+/* Estilos para el contenedor del sidebar */
+.sidebar {
+  height: 100vh;
+  width: 250px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para cada item del sidebar */
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Estilos para íconos dentro del sidebar */
+.sidebar-item .icon {
+  margin-right: 10px;
+  color: #111418;
+}
+
+/* Estilos para las etiquetas de cada item */
+.sidebar-item .label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #111418;
+}
+
+/* Hover sobre los items del sidebar */
+.sidebar-item:hover {
+  background-color: #f0f2f4;
+}
+
+/* Estilos para el item activo (utilizado por routerLinkActive) */
+.sidebar-item.active {
+  background-color: #f0f2f4;
+  border-radius: 8px;
+}
+
+/* Estilos para el ítem activo */
+.sidebar-item.active .label {
+  font-weight: 600;
+  color: #111418;
+}
+
+/* Estilos generales para el ícono del item activo */
+.sidebar-item.active .icon {
+  color: #111418;
+}

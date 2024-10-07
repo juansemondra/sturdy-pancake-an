@@ -32,8 +32,12 @@ export class ConductorComponent {
   }
 
   createConductor(nombre: string, telefono: string): void {
-    const telefonoNumber = parseInt(telefono, 10);  // Convertir a número
-    const newConductor: Conductor = { nombre, telefono: telefonoNumber, relacionBusRutaConductorIds: [] };
+    const telefonoNumber = parseInt(telefono, 10); // Convertir a número
+    const newConductor: Conductor = {
+      nombre,
+      telefono: telefonoNumber,
+      relacionBusRutaConductorIds: [],
+    };
     this.conductorService.createConductor(newConductor).subscribe(() => {
       this.getConductores();
     });
@@ -41,9 +45,11 @@ export class ConductorComponent {
 
   updateConductor(): void {
     if (this.selectedConductor && this.selectedConductor.id) {
-      this.conductorService.updateConductor(this.selectedConductor).subscribe(() => {
-        this.getConductores();
-      });
+      this.conductorService
+        .updateConductor(this.selectedConductor)
+        .subscribe(() => {
+          this.getConductores();
+        });
     }
   }
 
