@@ -1,0 +1,47 @@
+.container {
+  padding: 20px;
+}
+
+h2,
+h3 {
+  margin-bottom: 15px;
+}
+
+label {
+  margin-bottom: 10px;
+}
+
+select {
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.day-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+}
+
+button.selected {
+  background-color: #2884e6;
+  color: white;
+}
+
+button.btn-save,
+button.btn-add,
+button.btn-remove {
+  margin-top: 15px;
+}
+
+button.btn-remove {
+  background-color: #e74c3c;
+}

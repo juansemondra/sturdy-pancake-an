@@ -1,0 +1,78 @@
+<div class="container">
+  <h2>Assign Bus to Driver</h2>
+
+  <!-- Driver Selection -->
+  <label for="conductor-select">Select Driver:</label>
+  <select
+    id="conductor-select"
+    [(ngModel)]="selectedConductorId"
+    (change)="loadConductorDetails()"
+  >
+    <option value="" disabled selected>Select a conductor</option>
+    <option *ngFor="let conductor of conductores" [value]="conductor.id">
+      {{ conductor.nombre }}
+    </option>
+  </select>
+
+  <!-- Show assigned buses and allow the addition of new buses -->
+  <div *ngIf="selectedConductor">
+    <h3>Buses assigned to {{ selectedConductor.nombre }}</h3>
+
+    <!-- Loading Indicator -->
+    <div *ngIf="isLoading">
+      <p>Loading assigned buses...</p>
+    </div>
+
+    <!-- List buses assigned to this conductor -->
+    <div *ngIf="!isLoading && relacionesConductor.length > 0; else noBuses">
+      <div *ngFor="let relacion of relacionesConductor">
+        <form (ngSubmit)="updateRelacion(relacion)">
+          <p>
+            <strong>Bus:</strong>
+            {{ relacion.bus?.placa || "Bus not found" }} ({{
+              relacion.bus?.modelo || "N/A"
+            }})
+          </p>
+
+          <p><strong>Days Assigned:</strong></p>
+          <div class="day-buttons">
+            <button
+              *ngFor="let day of daysOfWeek"
+              type="button"
+              [class.selected]="isDaySelected(relacion.fechaDisponible, day)"
+              (click)="toggleDaySelection(relacion, day)"
+            >
+              {{ day }}
+            </button>
+          </div>
+
+          <button type="submit" class="btn-save">Save</button>
+          <button
+            type="button"
+            class="btn-remove"
+            (click)="removeBus(relacion)"
+          >
+            Remove Bus
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <ng-template #noBuses>
+      <p>No buses assigned to this conductor.</p>
+    </ng-template>
+
+    <h3>Add New Bus</h3>
+    <form (ngSubmit)="assignBusToConductor()">
+      <label for="bus-select">Select Bus:</label>
+      <select id="bus-select" [(ngModel)]="selectedBusId" name="busId">
+        <option value="" disabled selected>Select a bus</option>
+        <!-- Only show buses that are not yet assigned to the conductor -->
+        <option *ngFor="let bus of availableBuses" [value]="bus.id">
+          {{ bus.placa }} ({{ bus.modelo }})
+        </option>
+      </select>
+      <button type="submit" class="btn-add">Assign Bus</button>
+    </form>
+  </div>
+</div>
