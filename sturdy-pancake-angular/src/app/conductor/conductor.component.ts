@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ConductorService } from './conductor.service';
 import { Conductor } from './conductor.model';
 import { ListComponent } from '../list/list.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-conductor',
@@ -20,8 +21,10 @@ export class ConductorComponent implements OnInit {
     { field: 'telefono', header: 'Teléfono' },
     { field: 'direccion', header: 'Dirección' },
   ];
-
-  private conductorService = inject(ConductorService);
+  constructor(
+    private router: Router,
+    private conductorService: ConductorService
+  ) {}
 
   ngOnInit(): void {
     this.getConductores();
@@ -36,8 +39,7 @@ export class ConductorComponent implements OnInit {
   }
 
   onEdit(conductor: Conductor): void {
-    // Implement navigation to edit form
-    console.log('Edit conductor:', conductor);
+    this.router.navigate(['/conductores/editar', conductor.id]);
   }
 
   onDelete(conductor: Conductor): void {
