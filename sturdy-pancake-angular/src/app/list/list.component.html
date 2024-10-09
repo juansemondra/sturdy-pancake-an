@@ -1,13 +1,23 @@
+<!-- list.component.html -->
 <table>
   <thead>
     <tr>
       <th *ngFor="let column of columns">{{ column.header }}</th>
       <th>Acciones</th>
+      <!-- Columna para acciones -->
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let item of items">
-      <td *ngFor="let column of columns">{{ item[column.field] }}</td>
+      <td *ngFor="let column of columns">
+        <!-- Verifica si la columna es 'asignarBus' para renderizar el botón -->
+        <ng-container *ngIf="column.field !== 'asignarBus'; else asignarBusBtn">
+          {{ item[column.field] }}
+        </ng-container>
+        <ng-template #asignarBusBtn>
+          <button (click)="onAssignBus(item)">Asignar Bus</button>
+        </ng-template>
+      </td>
       <td>
         <button (click)="onEdit(item)">Editar</button>
         <button (click)="onDelete(item)">Eliminar</button>

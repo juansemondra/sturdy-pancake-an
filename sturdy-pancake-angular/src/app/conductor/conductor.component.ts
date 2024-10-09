@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConductorService } from './conductor.service';
 import { Conductor } from './conductor.model';
@@ -20,7 +20,9 @@ export class ConductorComponent implements OnInit {
     { field: 'nombre', header: 'Nombre' },
     { field: 'telefono', header: 'Teléfono' },
     { field: 'direccion', header: 'Dirección' },
+    { field: 'asignarBus', header: 'Asignar Bus' },
   ];
+
   constructor(
     private router: Router,
     private conductorService: ConductorService
@@ -49,6 +51,14 @@ export class ConductorComponent implements OnInit {
       });
     } else {
       console.error('Error: id es undefined y no puede eliminarse');
+    }
+  }
+
+  onAssignBus(conductor: Conductor): void {
+    if (conductor.id !== undefined) {
+      this.router.navigate(['/conductores/asignar-bus', conductor.id]);
+    } else {
+      console.error('Error: id es undefined y no puede asignarse bus');
     }
   }
 

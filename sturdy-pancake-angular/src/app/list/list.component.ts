@@ -18,6 +18,7 @@ export class ListComponent {
   @Input() columns: ListColumn[] = [];
   @Output() edit = new EventEmitter<any>();
   @Output() delete = new EventEmitter<any>();
+  @Output() assignBus = new EventEmitter<any>();
 
   onEdit(item: any): void {
     this.edit.emit(item);
@@ -25,5 +26,9 @@ export class ListComponent {
 
   onDelete(item: any): void {
     this.delete.emit(item);
+  }
+
+  onAssignBus(item: any) {
+    this.assignBus.emit(item);
   }
 }
