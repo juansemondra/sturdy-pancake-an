@@ -11,4 +11,5 @@ export const routes: Routes = [
   { path: 'conductores', component: ConductorComponent },
   { path: 'rutas', component: RutaComponent },
   { path: 'conductores/editar/:id', component: EditarConductorComponent },
+  { path: 'conductores/crear', component: CrearConductorComponent },
 ];

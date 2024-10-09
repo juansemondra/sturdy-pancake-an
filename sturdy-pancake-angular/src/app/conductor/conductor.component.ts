@@ -53,7 +53,6 @@ export class ConductorComponent implements OnInit {
   }
 
   createConductor(): void {
-    // Implement navigation to create form
-    console.log('Navigate to create conductor form');
+    this.router.navigate(['/conductores/crear']);
   }
 }
