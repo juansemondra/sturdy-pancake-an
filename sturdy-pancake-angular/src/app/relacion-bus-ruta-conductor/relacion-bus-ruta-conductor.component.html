@@ -1,0 +1,27 @@
+<div class="relaciones-container">
+  <h2>Relaciones Bus - Ruta - Conductor</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Ruta ID</th>
+        <th>Bus ID</th>
+        <th>Conductor ID</th>
+        <th>Fecha Disponible</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let relacion of relaciones">
+        <td>{{ relacion.id }}</td>
+        <td>{{ relacion.rutaId }}</td>
+        <td>{{ relacion.busId }}</td>
+        <td>{{ relacion.conductorId }}</td>
+        <td>{{ relacion.fechaDisponible }}</td>
+        <td>
+          <button (click)="deleteRelacion(relacion.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
