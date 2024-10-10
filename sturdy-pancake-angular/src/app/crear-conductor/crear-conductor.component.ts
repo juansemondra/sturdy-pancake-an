@@ -3,11 +3,12 @@ import { Conductor } from '../conductor/conductor.model';
 import { Router } from '@angular/router';
 import { ConductorService } from '../conductor/conductor.service';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-crear-conductor',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './crear-conductor.component.html',
   styleUrl: './crear-conductor.component.css',
 })

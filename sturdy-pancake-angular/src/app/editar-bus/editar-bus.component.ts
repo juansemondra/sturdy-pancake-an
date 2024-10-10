@@ -3,11 +3,12 @@ import { Bus } from '../bus/bus.model';
 import { BusService } from '../bus/bus.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-editar-bus',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './editar-bus.component.html',
   styleUrls: ['./editar-bus.component.css'],
 })

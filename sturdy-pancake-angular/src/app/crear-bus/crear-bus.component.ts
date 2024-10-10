@@ -3,11 +3,12 @@ import { Bus } from '../bus/bus.model';
 import { BusService } from '../bus/bus.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-crear-bus',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './crear-bus.component.html',
   styleUrls: ['./crear-bus.component.css'],
 })
