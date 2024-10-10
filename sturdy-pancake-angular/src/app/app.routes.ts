@@ -5,6 +5,8 @@ import { RutaComponent } from './ruta/ruta.component';
 import { EditarConductorComponent } from './editar-conductor/editar-conductor.component';
 import { CrearConductorComponent } from './crear-conductor/crear-conductor.component';
 import { AsignarBusComponent } from './asignar-bus/asignar-bus.component';
+import { EditarBusComponent } from './editar-bus/editar-bus.component';
+import { CrearBusComponent } from './crear-bus/crear-bus.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/buses', pathMatch: 'full' },
@@ -15,4 +17,6 @@ export const routes: Routes = [
   { path: 'conductores/crear', component: CrearConductorComponent },
   //asignar bus
   { path: 'conductores/asignar-bus/:id', component: AsignarBusComponent },
+  { path: 'editar-bus/:id', component: EditarBusComponent },
+  { path: 'crear-bus', component: CrearBusComponent },
 ];

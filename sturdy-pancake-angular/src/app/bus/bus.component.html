@@ -1,33 +1,24 @@
 <div class="container">
   <h1>Gestión de Buses</h1>
 
-  <div *ngIf="buses.length === 0">No hay buses disponibles.</div>
-
-  <ul>
-    <li *ngFor="let bus of buses" (click)="onSelect(bus)">
-      {{ bus.placa }} - {{ bus.modelo }}
-    </li>
-  </ul>
-
-  <div *ngIf="selectedBus">
-    <h2>Editar Bus</h2>
-    <input [(ngModel)]="selectedBus.placa" placeholder="Placa" />
-    <input [(ngModel)]="selectedBus.modelo" placeholder="Modelo" />
-    <button (click)="updateBus(selectedBus)">Actualizar</button>
+  <!-- Navigation to Create Bus -->
+  <div class="top-actions">
+    <button class="btn-add" (click)="router.navigate(['/crear-bus'])">
+      Crear Nuevo Bus
+    </button>
   </div>
 
-  <h2>Crear Nuevo Bus</h2>
-  <input #nuevaPlaca placeholder="Placa" />
-  <input #nuevoModelo placeholder="Modelo" />
-  <button (click)="createBus(nuevaPlaca.value, nuevoModelo.value)">Crear</button>
-
-  <div>
-    <h2>Eliminar Bus</h2>
-    <ul>
-      <li *ngFor="let bus of buses">
-        {{ bus.placa }}
-        <button *ngIf="bus.id !== undefined" (click)="deleteBus(bus.id!)">Eliminar</button>
-      </li>
-    </ul>
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
   </div>
+
+  <!-- List of Buses using ListComponent -->
+  <app-list
+    [items]="buses"
+    [columns]="listColumns"
+    (edit)="onEdit($event)"
+    (delete)="onDelete($event)"
+    (assignBus)="onAssignBus($event)"
+  ></app-list>
 </div>
