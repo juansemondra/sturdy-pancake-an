@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="form-header">
+    <h2>Editar Bus</h2>
+  </div>
+  <form (ngSubmit)="onSubmit()" #editBusForm="ngForm">
+    <div class="form-group">
+      <label for="placa">Placa:</label>
+      <input
+        type="text"
+        id="placa"
+        name="placa"
+        [(ngModel)]="bus.placa"
+        required
+        class="input-field"
+        placeholder="Ingrese la placa"
+      />
+    </div>
+    <div class="form-group">
+      <label for="modelo">Modelo:</label>
+      <input
+        type="text"
+        id="modelo"
+        name="modelo"
+        [(ngModel)]="bus.modelo"
+        required
+        class="input-field"
+        placeholder="Ingrese el modelo"
+      />
+    </div>
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn-save" [disabled]="isLoading">
+        {{ isLoading ? "Guardando..." : "Guardar" }}
+      </button>
+      <button
+        type="button"
+        class="btn-cancel"
+        (click)="router.navigate(['/buses'])"
+      >
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
