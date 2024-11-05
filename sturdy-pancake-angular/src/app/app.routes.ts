@@ -7,16 +7,40 @@ import { CrearConductorComponent } from './crear-conductor/crear-conductor.compo
 import { AsignarBusComponent } from './asignar-bus/asignar-bus.component';
 import { EditarBusComponent } from './editar-bus/editar-bus.component';
 import { CrearBusComponent } from './crear-bus/crear-bus.component';
+import { LoginComponent } from './security/login/login.component';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/buses', pathMatch: 'full' },
-  { path: 'buses', component: BusComponent },
-  { path: 'conductores', component: ConductorComponent },
-  { path: 'rutas', component: RutaComponent },
-  { path: 'conductores/editar/:id', component: EditarConductorComponent },
-  { path: 'conductores/crear', component: CrearConductorComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'buses', component: BusComponent, canActivate: [AuthGuard] },
+  {
+    path: 'conductores',
+    component: ConductorComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'rutas', component: RutaComponent, canActivate: [AuthGuard] },
+  {
+    path: 'conductores/editar/:id',
+    component: EditarConductorComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'conductores/crear',
+    component: CrearConductorComponent,
+    canActivate: [AuthGuard],
+  },
   //asignar bus
-  { path: 'conductores/asignar-bus/:id', component: AsignarBusComponent },
-  { path: 'editar-bus/:id', component: EditarBusComponent },
-  { path: 'crear-bus', component: CrearBusComponent },
+  {
+    path: 'conductores/asignar-bus/:id',
+    component: AsignarBusComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'editar-bus/:id',
+    component: EditarBusComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'crear-bus', component: CrearBusComponent, canActivate: [AuthGuard] },
+  //login
+  { path: 'login', component: LoginComponent },
 ];
