@@ -1,29 +1,22 @@
-import { Injectable } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor
-} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { inject } from '@angular/core';
+import { HttpInterceptorFn } from '@angular/common/http';
 import { AuthService } from '../shared/auth.service';
 
-// https://stackoverflow.com/questions/52468071/how-to-send-jwt-token-as-authorization-header-in-angular-6
-// https://v17.angular.io/cli/generate#interceptor-command
-@Injectable()
-export class AuthInterceptor implements HttpInterceptor {
+export const authInterceptorFn: HttpInterceptorFn = (req, next) => {
+  const authService = inject(AuthService);
+  const token = authService.token();
 
-  constructor(private auth: AuthService) { }
-
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    let token = this.auth.token();
-
-    if (token == null) {
-      return next.handle(request);
-    } else {
-      return next.handle(request.clone({
-        headers: request.headers.set('Authorization', `Bearer ${token}`),
-      }));
-    }
+  if (token) {
+    const clonedRequest = req.clone({
+      headers: req.headers.set('Authorization', `Bearer ${token}`),
+    });
+    console.log(
+      'Authorization header added:',
+      clonedRequest.headers.get('Authorization')
+    );
+    return next(clonedRequest);
+  } else {
+    console.log('No JWT token found, proceeding without Authorization header.');
+    return next(req);
   }
-}
+};
