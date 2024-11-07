@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     this.auth.login(this.loginDto).subscribe({
       next: (jwt) => {
         console.log(jwt);
-        this.router.navigate(['cuenta']);
+        this.router.navigate(['buses']);
       },
       error: (err) => {
         console.error('Login failed:', err);
