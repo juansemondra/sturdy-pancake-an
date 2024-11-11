@@ -13,7 +13,7 @@ import { AuthService } from '../shared/auth.service';
 export class NavbarComponent {
   activeLink: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(public authService: AuthService, private router: Router) {}
 
   setActiveLink(link: string): void {
     this.activeLink = link;
@@ -22,5 +22,13 @@ export class NavbarComponent {
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  isCoordinador(): boolean {
+    return this.authService.role() === 'COORDINADOR';
+  }
+
+  isAdminRutas(): boolean {
+    return this.authService.role() === 'ADMIN_RUTAS';
   }
 }

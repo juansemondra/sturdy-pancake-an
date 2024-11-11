@@ -54,3 +54,15 @@
 .sidebar-item.active .icon {
   color: #111418;
 }
+
+.sidebar-title {
+  padding: 1rem;
+  text-align: center;
+}
+
+.sidebar-title h1 {
+  color: #111418;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}

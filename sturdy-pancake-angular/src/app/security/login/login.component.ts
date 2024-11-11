@@ -16,22 +16,21 @@ export class LoginComponent implements OnInit {
   loginDto: LoginDto = new LoginDto('', '');
   errorMessage: string = '';
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.auth.logout();
+    this.authService.logout();
   }
 
-  login() {
-    this.errorMessage = ''; // Clear any previous error
-    this.auth.login(this.loginDto).subscribe({
-      next: (jwt) => {
-        console.log(jwt);
-        this.router.navigate(['buses']);
+  onLogin(loginDto: LoginDto) {
+    this.authService.login(loginDto).subscribe({
+      next: (response) => {
+        const initialRoute = this.authService.getInitialRoute();
+        this.router.navigate([initialRoute]);
       },
-      error: (err) => {
-        console.error('Login failed:', err);
-        this.errorMessage = `Error en el inicio de sesión: ${err.message}`;
+      error: (error) => {
+        // Handle error
+        console.error('Login failed:', error);
       },
     });
   }

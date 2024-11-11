@@ -11,7 +11,11 @@ import { LoginComponent } from './security/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
   { path: 'buses', component: BusComponent, canActivate: [AuthGuard] },
   {
     path: 'conductores',

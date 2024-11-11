@@ -66,4 +66,16 @@ export class AuthService {
     }
     return null;
   }
+
+  getInitialRoute(): string {
+    const userRole = this.role();
+    switch (userRole) {
+      case 'COORDINADOR':
+        return '/buses';
+      case 'ADMIN_RUTAS':
+        return '/rutas';
+      default:
+        return '/login';
+    }
+  }
 }
